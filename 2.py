@@ -1,9 +1,10 @@
-def clean_sheet(sheet):
+def clean_sheet(filename):
     """
     Args:
-        sheet (list): spreadsheet
+        filename (str): filename
     """
-    return [[int(x) for x in line.strip().split()] for line in data]
+    with open(filename) as f:
+        return [[int(x) for x in line.strip().split()] for line in f.readlines()]
 
 
 def dec2a(sheet):
