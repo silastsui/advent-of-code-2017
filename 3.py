@@ -1,4 +1,21 @@
 import math
+
+def get_sum(x, y):
+    neighbours = [(x-1, y-1),
+                  (x-1, y),
+                  (x-1, y+1),
+                  (x, y-1),
+                  (x, y+1),
+                  (x+1, y-1),
+                  (x+1, y),
+                  (x+1, y+1)]
+    total = 0
+    for square in neighbours:
+        if square in grid.keys():
+            total += grid[square]
+
+    return total
+
 def dec3a(num):
     """
     Args:
@@ -44,3 +61,34 @@ def dec3b(num):
     Args:
         num (int): input number
     """
+    grid = {(0, 0): 1}
+
+    x, y = 0, 0
+    x_dir, y_dir = True, True
+    length = 1
+    val = 1
+    while val < puzzle_input:
+        if x_dir and y_dir: #moving right
+            for i in range(length):
+                x += 1
+                grid[(x, y)] = get_sum(x, y)
+            x_dir = False
+        if not x_dir and y_dir: #moving up
+            for i in range(length):
+                y += 1
+                grid[(x, y)] = get_sum(x, y)
+            y_dir = False
+            length += 1
+        if not x_dir and not y_dir: #moving left
+            for i in range(length):
+                x -= 1
+                grid[(x, y)] = get_sum(x, y)
+            x_dir = True
+        if x_dir and not y_dir: #moving down
+            for i in range(length):
+                y -= 1
+                grid[(x, y)] = get_sum(x, y)
+            y_dir = True
+            length += 1
+
+    return list(filter(lambda x: x > puzzle_input, sorted(grid.values())))[0]
