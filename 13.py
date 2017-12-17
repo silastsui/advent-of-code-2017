@@ -20,7 +20,7 @@ def get_scanner_loc(depth, time):
     return 2*(depth-1) - time
 
 
-def dec12a(data):
+def dec13a(data):
     """
     Args:
         lengths (list): list of integers
@@ -35,7 +35,7 @@ def dec12a(data):
     return severity
 
 
-def dec12b(data):
+def dec13b(data):
     """
     Args:
         lengths (list): list of integers
